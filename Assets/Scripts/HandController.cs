@@ -7,8 +7,6 @@ public class HandController : MonoBehaviour
     [SerializeField] private HandReference[] _handRefs = new HandReference[2];
     private static readonly Material[] _handMats = new Material[2];
 
-    private readonly GameObject[] _motionTargets = new GameObject[2];
-
     private void Awake()
     {
         HandFormations.Initialize(_handRefs[0], _handRefs[1]);
@@ -24,19 +22,10 @@ public class HandController : MonoBehaviour
             hands[i].AddMotion(HandFormations.slingRingMotion2);
         }
 
-        for (int i = 0; i < 1; ++i)
-        {
-            _motionTargets[i] = new GameObject("Target");
-            _motionTargets[i].transform.SetParent(transform.GetChild(1));
-            TrailRenderer tr = _motionTargets[i].AddComponent<TrailRenderer>();
-            tr.time = 2.5f;
-            tr.widthMultiplier = 0.1f;
-        }
-
         //HandFormations.saveHand.onTriggered += FileSend;
         //HandFormations.shootWeb.onTriggered += ShootWeb;
 
-        HandFormations.openPortal1.onStarted += (l, r) => PortalController.StartPortal(r, HandFormations.slingRingMotion1, PortalController.portalsInfo[0]);
+        HandFormations.openPortal1.onStarted += (l, r) => PortalController.StartPortal(l, r, HandFormations.slingRingMotion1, PortalController.portalsInfo[0]);
         HandFormations.openPortal1.onUpdateTrigger += (l, r) => PortalController.FormPortal(r, HandFormations.slingRingMotion1, PortalController.portalsInfo[0]);
         HandFormations.openPortal1.onCancelled += (l, r) => PortalController.CancelPortal(r, HandFormations.slingRingMotion1, PortalController.portalsInfo[0]);
 

@@ -22,7 +22,7 @@ public class MotionInfo
 
     public Vector3 ToVector(float theta, float scalar, float startIndex)
     {
-        return Polar2Rect(startIndex + FromTheta(_polarMotionAlgorithm, theta) * scalar, startIndex + theta) + offset;
+        return Polar2Rect(FromTheta(_polarMotionAlgorithm, theta) * scalar, startIndex + theta) + offset;
     }
 
     public static float FromTheta(System.Func<float, float> algorithm, float theta)

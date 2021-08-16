@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HandInfo
 {
+    public static Vector3 shoulderOffsetL = new Vector3(-0.15f, 0.8f, 0f);
+    public static Vector3 shoulderOffsetR = new Vector3(0.15f, 0.8f, 0f);
+
     public enum HandSide
     {
         Left, Right
@@ -128,7 +131,7 @@ public class HandInfo
 
     public bool MatchingMotion(MotionInfo motion, float errorMargin)
     {
-        if (handAngles[motion] <= 0.01f)
+        if (handAngles[motion] == 0f)
         {
             return StartMatchingMotion(motion, errorMargin);
         }
@@ -138,17 +141,20 @@ public class HandInfo
 
     public bool StartMatchingMotion(MotionInfo motion, float errorMargin)
     {
-        float closenessX = Mathf.Abs(RelativePosition.x - motion.offset.x);
-        float closenessZ = Mathf.Abs(RelativePosition.z - motion.offset.z);
+        Debug.Log("Start Match Motion");
+
+        float distance = Mathf.Abs(RelativePosition.x - motion.offset.x);
         bool isAbove = RelativePosition.y > motion.offset.y;
 
-        return closenessX <= errorMargin && closenessZ <= errorMargin && isAbove;
+        return isAbove && distance < errorMargin / 2f;
     }
 
     public bool ContinueMatchingMotion(MotionInfo motion, float errorMargin)
     {
-        float distance = Vector3.Distance(RelativePosition, motion.offset);
-        bool isClose = distance > motionSizes[motion] - errorMargin && distance < motionSizes[motion] + errorMargin;
+        Debug.Log("Continue Match Motion");
+
+        float distance = Vector3.Distance(RelativePosition, motion.ToVector(handAngles[motion] * -6.28f, motionSizes[motion], motion.startIndex));
+        bool isClose = distance < errorMargin;
 
         return isClose;
     }

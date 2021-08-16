@@ -43,7 +43,7 @@ public class HandEvent
                 onUpdateTrigger.Invoke(handL, handR);
             }
         }
-        else
+        else if (_isTriggering)
         {
             _isTriggering = false;
             onCancelled.Invoke(handL, handR);

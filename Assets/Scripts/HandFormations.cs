@@ -17,8 +17,8 @@
 
     #region Motions
 
-    public static MotionInfo slingRingMotion1 = new MotionInfo(new System.Func<float, float>((theta) => 0.25f), new UnityEngine.Vector3(0.2f, 1f, 0.5f), 1.5f, MotionInfo.Direction.Clockwise);
-    public static MotionInfo slingRingMotion2 = new MotionInfo(new System.Func<float, float>((theta) => 0.25f), new UnityEngine.Vector3(0.2f, 1f, 0.5f), 1.5f, MotionInfo.Direction.Counter_Clockwise);
+    public static MotionInfo slingRingMotion1 = new MotionInfo(new System.Func<float, float>((theta) => 1f), new UnityEngine.Vector3(0.2f, 1f, 0.5f), 1.5f, MotionInfo.Direction.Clockwise);
+    public static MotionInfo slingRingMotion2 = new MotionInfo(new System.Func<float, float>((theta) => 1f), new UnityEngine.Vector3(0.2f, 1f, 0.5f), 1.5f, MotionInfo.Direction.Counter_Clockwise);
 
     #endregion
 
